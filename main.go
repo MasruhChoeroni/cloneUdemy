@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	"cloneUdemy/routes"
+
 	"github.com/gofiber/fiber/v2"
 	_ "github.com/lib/pq"
 )
@@ -64,6 +66,8 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("I'm a GET request!")
 	})
+
+	routes.R_course(app.Group("/course"))
 
 	// Get all records from postgreSQL
 	app.Get("/course", func(c *fiber.Ctx) error {
