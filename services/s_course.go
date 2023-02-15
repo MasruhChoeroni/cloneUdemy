@@ -36,8 +36,7 @@ func CourseServiceGet(c *fiber.Ctx) (*models.Courses, error) {
 	if err := connect(); err != nil {
 		log.Fatal(err)
 	}
-	// db := config.config()
-	//Select all Course(s) from database
+
 	rows, err := db.Query("SELECT * FROM courses order by id")
 	if err != nil {
 		return nil, err
@@ -50,7 +49,6 @@ func CourseServiceGet(c *fiber.Ctx) (*models.Courses, error) {
 		if err := rows.Scan(&course.ID, &course.CreatorId, &course.Title, &course.SubTitle, &course.Description, &course.Language, &course.Price, &course.CreatedAt, &course.UpdatedAt, &course.DeletedAt); err != nil {
 			return nil, err // Exit if we get an error
 		}
-
 		// Append Course to Courses
 		result.Courses = append(result.Courses, course)
 	}
